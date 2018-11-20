@@ -5,12 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/19 09:00:45 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/14 21:33:36 by pdoherty         ###   ########.fr       */
+/*   Created: 2018/11/16 10:47:55 by pdoherty          #+#    #+#             */
+/*   Updated: 2018/11/20 15:23:34 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "printf.h"
+#include <stdio.h>
+
+int main(void)
 {
+	int a = ft_printf("%-10.5d\n", 4242);
+	int b = printf("%-10.5d\n", 4242);
+	printf("%d, %d\n", a, b);
 	return (0);
 }

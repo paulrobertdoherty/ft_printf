@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 16:28:21 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/15 17:35:47 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/19 20:29:30 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	put_conversion(char c, t_format *format, va_list list, int *chars)
 {
-	char	g;
-
 	if (c == 's')
 		put_string(list, format, chars);
 	else if (c == 'p')
@@ -26,12 +24,9 @@ static void	put_conversion(char c, t_format *format, va_list list, int *chars)
 	else if (c == 'f')
 		put_float(list, format, chars);
 	else if (c == 'c')
-	{
-		g = (char)va_arg(list, int);
-		print_with_flags(&g, format, chars, 'c');
-	}
+		printc_with_flags((char)va_arg(list, int), format, chars);
 	else if (c == '%')
-		print_with_flags("%", format, chars, '%');
+		print_with_flags("%", format, chars);
 }
 
 
@@ -48,6 +43,7 @@ static void	print_conversion(char *str, va_list list, int *i, int *chars)
 	t_format	*format;
 
 	j = 0;
+	(*i)++;
 	while (str[j])
 	{
 		if (is_conversion(str[j]))
@@ -61,7 +57,7 @@ static void	print_conversion(char *str, va_list list, int *i, int *chars)
 		j++;
 	}
 	ft_putstr_wc(str, chars);
-	*i += j + 1;
+	*i += j;
 }
 
 static int	print(const char *str, va_list list)

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/09/10 20:41:43 by pdoherty          #+#    #+#              #
-#    Updated: 2018/11/14 19:23:42 by pdoherty         ###   ########.fr        #
+#    Created: 2018/09/16 16:23:43 by pdoherty          #+#    #+#              #
+#    Updated: 2018/11/19 13:15:57 by pdoherty         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,19 +16,16 @@ SRCS = *.c
 
 OUT = $(SRCS:%.c=%.o)
 
-LIB = libft/libft.a
-
-FLAGS = -Wall -Werror -Wextra
-
-INCLUDES = printf.h
+INCLUDES = libft/libft.h printf.h
 
 all: $(NAME)
 
 $(NAME):
-	@make -C libft/ fclean && make -C libft && make -C libft/ clean
-	@gcc $(FLAGS) -c $(SRCS) -I $(INCLUDES)
-	@gcc -o $(NAME) $(OUT) $(LIB)
-
+	@cp libft/libft.a $(NAME)
+	@gcc -Wall -Werror -Wextra -c $(SRCS) -I $(INCLUDES)
+	@ar rcs $(NAME) $(OUT)
+	@ranlib $(NAME)
+	
 clean:
 	@rm -f $(OUT)
 
@@ -36,4 +33,4 @@ fclean:
 	@rm -f $(OUT)
 	@rm -f $(NAME)
 
-re: fclean all
+re: fclean $(NAME)

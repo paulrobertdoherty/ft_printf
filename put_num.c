@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:24:49 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/15 17:34:55 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:57:58 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,14 @@ static unsigned long long	get_ull(va_list list, T type, int *is_negative)
 
 void	put_num(va_list list, t_format *format, int *chars, char c)
 {
-	int		base;
 	T		type;
 	char	*num;
 	int		is_negative;
 	
-	base = 10;
-	if (c == 'o')
-		base = 8;
-	else if (c == 'x')
-		base = 16;
 	type = get_type(format, c);
 	is_negative = 0;
-	num = get_num_str(&is_negative, get_ull(list, type, &is_negative), base,
-			c == 'X');
-	print_with_flags(num, format, chars, c);
+	num = get_num_str(&is_negative, get_ull(list, type, &is_negative), c,
+			format);
+	print_with_flags(num, format, chars);
 	free(num);
 }

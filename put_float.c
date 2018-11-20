@@ -6,11 +6,12 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 19:56:10 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/14 21:33:50 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/16 13:42:02 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+#include <stdio.h>
 
 static int	llof(va_list list, t_format *format, int *chars)
 {

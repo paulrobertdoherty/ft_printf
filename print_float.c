@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 21:57:52 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/15 17:32:57 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/18 20:19:42 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_dig_str(long double num, t_format *format)
 	int		i;
 	char	*tr;
 
-	if (format->precision != -1)
+	if (format->precision != 0)
 		precision = format->precision;
 	else
 		precision = 6;
@@ -44,7 +44,7 @@ int			print_float(unsigned long long first, long double num,
 
 	chars = 0;
 	s = get_num_str(&is_negative, first, 10, 0);
-	print_with_flags(s, format, &chars, 'f');
+	print_with_flags(s, format, &chars);
 	ft_strdel(&s);
 	s = get_dig_str(num, format);
 	ft_putchar_wc('.', &chars);
