@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 16:00:46 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/19 18:58:21 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/28 14:36:48 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	add_width(char *str, t_format *format)
 	{
 		if (str[i] == '.')
 			return ;
-		if (ft_isdigit(str[i]))
+		if (ft_isdigit(str[i]) && str[i] != '0')
 		{
 			format->width = ft_atoi(&str[i]);
 			return ;

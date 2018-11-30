@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 18:32:12 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/14 21:40:02 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:51:24 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ unsigned long long	i_arg(va_list list, int *is_negative)
 	if (c < 0)
 	{
 		*is_negative = 1;
+		if (c == -2147483648)
+			return (2147483648);
 		return ((unsigned long long)-c);
 	}
 	return (unsigned long long)c;

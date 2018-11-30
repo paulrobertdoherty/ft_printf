@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:24:49 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/19 17:57:58 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/28 21:29:19 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,21 @@ static unsigned long long	get_ull(va_list list, T type, int *is_negative)
 		return (get_arg(list, type, is_negative));
 }
 
-void	put_num(va_list list, t_format *format, int *chars, char c)
+void						put_num(va_list list, t_format *format, int *chars,
+							char c)
 {
 	T		type;
 	char	*num;
 	int		is_negative;
-	
+
+	if (c == 'i')
+		c = 'd';
 	type = get_type(format, c);
 	is_negative = 0;
+	format->zero = format->zero && !format->minus;
+	format->plus = format->plus && c != 'u';
+	format->space = format->space && c != 'u' &&
+		(c != 'd' || (c == 'd' && !format->plus && format->width == -1));
 	num = get_num_str(&is_negative, get_ull(list, type, &is_negative), c,
 			format);
 	print_with_flags(num, format, chars);

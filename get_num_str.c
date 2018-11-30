@@ -6,17 +6,16 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 18:36:46 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/19 19:45:35 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/28 21:29:39 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdio.h>
 
 static size_t	digits_from_base(unsigned long long n, int base)
 {
 	int	tr;
-	
+
 	if (n == 0)
 		return (1);
 	tr = 0;
@@ -62,6 +61,17 @@ static char		*get_base(int in, ull n, int b, int c)
 	return (tr);
 }
 
+static void		correct_negative(char *str)
+{
+	int	i;
+
+	str[0] = '-';
+	i = 1;
+	while (str[i] && str[i] != '-')
+		i++;
+	str[i] = '0';
+}
+
 char			*get_num_str(int *in, unsigned long long n, char c, t_format *f)
 {
 	int		b;
@@ -70,17 +80,22 @@ char			*get_num_str(int *in, unsigned long long n, char c, t_format *f)
 	char	*tr;
 
 	ca = 0;
-	if (c == 'd' || c == 'i')
-		b = 10;
-	else if (c == 'o')
+	b = 10;
+	if (c == 'o')
 		b = 8;
-	else
+	else if (c == 'x' || c == 'X')
 	{
 		b = 16;
 		ca = c == 'X';
 	}
 	base = get_base(*in, n, b, ca);
-	tr = get_front(base, n, c, f);
+	f->space = f->space && !(*in);
+	if (!f->precision && f->hash && c == 'o')
+		tr = ft_strdup("0");
+	else
+		tr = get_front(base, n, c, f);
 	ft_strdel(&base);
+	if (*in && tr[0] == '0')
+		correct_negative(tr);
 	return (tr);
 }

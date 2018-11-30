@@ -6,7 +6,7 @@
 #    By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/16 16:23:43 by pdoherty          #+#    #+#              #
-#    Updated: 2018/11/19 13:15:57 by pdoherty         ###   ########.fr        #
+#    Updated: 2018/11/27 16:38:29 by pdoherty         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME):
 	@cp libft/libft.a $(NAME)
-	@gcc -Wall -Werror -Wextra -c $(SRCS) -I $(INCLUDES)
+	@gcc -c $(SRCS) -I $(INCLUDES)
 	@ar rcs $(NAME) $(OUT)
 	@ranlib $(NAME)
 	

@@ -6,12 +6,11 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 21:03:28 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/18 19:54:01 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/24 11:50:06 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdio.h>
 
 void		put_string(va_list list, t_format *format, int *chars)
 {

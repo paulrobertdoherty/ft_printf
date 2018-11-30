@@ -6,12 +6,11 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 19:44:32 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/19 18:58:34 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/24 19:05:50 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdio.h>
 
 static t_format	*new_t_format(void)
 {
@@ -29,7 +28,7 @@ static t_format	*new_t_format(void)
 	tr->ll = 0;
 	tr->L = 0;
 	tr->precision = -1;
-	tr->width = 0;
+	tr->width = -1;
 	tr->zero = 0;
 	tr->space = 0;
 	return (tr);
