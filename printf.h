@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 09:48:11 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/25 09:42:43 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/29 23:16:06 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <unistd.h>
 # include "printf_types.h"
 # include "libft/libft.h"
-
-#include <stdio.h>
 
 void		add_flags(char *str, t_format *format);
 void		add_zero(char *str, t_format *format);

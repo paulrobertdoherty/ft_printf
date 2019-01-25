@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 13:31:26 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/28 22:55:44 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/29 23:25:26 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,24 @@ static char	*add_strings(char *one, char *two, char *str)
 	return (tr);
 }
 
+static char	*get_space_string(char *str, t_format *format, int l)
+{
+	char	*space;
+
+	if (format->precision == -1)
+	{
+		if (format->width == -1)
+			space = get_space(format->space, 0, 0);
+		else
+			space = get_space(format->space, format->width - l,
+					format->zero || format->precision > l);
+	}
+	else
+		space = get_space(format->space, (str[0] == '-') + format->precision -
+				l, format->zero || format->precision > l);
+	return (space);
+}
+
 char		*get_front(char *str, ull n, char c, t_format *format)
 {
 	char	*header;
@@ -76,17 +94,7 @@ char		*get_front(char *str, ull n, char c, t_format *format)
 	l = ft_strlen(str) + ft_strlen(header);
 	if (c == 'd' && format->plus && l == format->precision)
 		format->precision++;
-	if (format->precision == -1)
-	{
-		if (format->width == -1)
-			space = get_space(format->space, 0, 0);
-		else
-			space = get_space(format->space, format->width - l,
-					format->zero || format->precision > l);
-	}
-	else
-		space = get_space(format->space, (str[0] == '-') + format->precision -
-				l, format->zero || format->precision > l);
+	space = get_space_string(str, format, l);
 	if (format->zero || format->precision > l)
 		return (add_strings(header, space, ft_strdup(str)));
 	if (format->minus && !(format->zero || format->precision > l))

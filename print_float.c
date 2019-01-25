@@ -6,47 +6,63 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 21:57:52 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/29 10:44:06 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/11/29 23:08:11 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static long double	ft_decimal_pow(long double n, int p)
+static long double	rhte(long double num, int nums, long double ta)
 {
-	if (p == 0)
-		return (1.0);
-	if (p == 1)
-		return (n);
-	return (n * ft_decimal_pow(n, p - 1));
+	int	j;
+
+	if (nums % 10 < 5)
+		return (num);
+	else if (nums % 10 > 5)
+		return (num + ta);
+	else
+	{
+		j = ((nums % 1000) - (nums % 100)) / 100;
+		if (j % 2 == 0)
+			return (num);
+		return (num + ta);
+	}
 }
 
 static long double	round_half_to_even(long double num, int precision)
 {
-	long double	a;
+	int			nums;
+	int			i;
+	int			j;
+	long double	ta;
+	long double	n;
 
-	a = 5 * ft_decimal_pow(0.1, precision);
-	return (num + a);
+	if (num < 0)
+		num = -num;
+	n = num - (long)num;
+	ta = 5.0;
+	i = 0;
+	while (i < precision + 1)
+	{
+		n *= 10;
+		if (i < precision - 3)
+			n = n - (long)n;
+		ta *= 0.1;
+		i++;
+	}
+	return (rhte(num, (int)n, ta));
 }
 
 static char			*get_dig_str(long double num, t_format *format)
 {
-	int		precision;
 	int		i;
 	char	*tr;
 
-	if (format->precision != -1)
-		precision = format->precision;
-	else
-		precision = 6;
-	if (num < 0)
-		num = -num;
-	num = round_half_to_even(num, precision + 1);
-	tr = ft_strnew(precision);
+	tr = ft_strnew(format->precision);
 	i = 0;
 	num -= (long)num;
 	num *= 10;
-	while (i < precision)
+	while (i < format->precision)
 	{
 		tr[i] = (long)num + '0';
 		i++;
@@ -80,10 +96,11 @@ int					print_float(unsigned long long first, long double num,
 	t_format	*nf;
 	int			chars;
 
+	format->precision = format->precision == -1 ? 6 : format->precision;
+	num = round_half_to_even(num, format->precision);
 	chars = 0;
 	nf = copy_format(format);
-	if (!format->precision)
-		first += (ull)(num - (long)num);
+	first += ((long)num % 10) - (first % 10);
 	f = get_num_str(&is_negative, first, 'f', nf);
 	free(nf);
 	if (format->hash || format->precision)

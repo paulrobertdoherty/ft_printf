@@ -6,7 +6,7 @@
 /*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 16:28:21 by pdoherty          #+#    #+#             */
-/*   Updated: 2018/11/25 09:24:40 by pdoherty         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:58:19 by pdoherty         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	put_conversion(char c, t_format *format, va_list list, int *chars)
 	if (c == 's')
 		put_string(list, format, chars);
 	else if (c == 'p')
+	{
+		format->space = 0;
 		put_pointer(list, format, chars);
+	}
 	else if (c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x' ||
 			c == 'X')
 		put_num(list, format, chars, c);

@@ -1,8 +1,24 @@
-#include "printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdoherty <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/29 23:09:09 by pdoherty          #+#    #+#             */
+/*   Updated: 2018/12/03 19:11:11 by pdoherty         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main(void) {
-	int a = ft_printf("%.30Lf\n", 15.1);
-	int b = printf("%.30Lf\n", 15.1);
-	printf("%d, %d\n", a, b);
-	return 0;
+#include "printf.h"
+#include <stdio.h>
+
+int	main(void)
+{
+	long double d = 1.1;
+	ft_printf("%f, %lf, %Lf, %.f, %.30f, % 5f\n", 1.1, 1.234, d, 1.3, 1.3, 5.2);
+	printf("%f, %lf, %Lf, %.f, %.30f, % 5f\n", 1.1, 1.234, d, 1.3, 1.3, 5.2);
+	ft_printf("%p\n", NULL);
+	printf("%p\n", NULL);
+	return (0);
 }
